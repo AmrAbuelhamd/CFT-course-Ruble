@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CFT</string>
+
+
+    <string name="ruble"> = %1$s ₽</string>
+    <string name="editTextHint">add sum that you want to convert</string>
+</resources>
