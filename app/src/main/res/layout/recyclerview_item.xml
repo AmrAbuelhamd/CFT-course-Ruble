@@ -35,35 +35,34 @@
             android:layout_marginBottom="8dp"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/editTextNumber"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/textInputLayout"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/charCodeTextView"
             app:layout_constraintVertical_bias="0.0"
             tools:text="СДР (специальные права заимствования)" />
 
-        <EditText
-            android:id="@+id/editTextNumber"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-            android:lines="1"
-            android:autofillHints="@string/editTextHint"
-            android:ems="10"
-            android:hint="@string/editTextHint"
-            android:inputType="number"
-            android:labelFor="@+id/charCodeTextView"
-            app:layout_constraintBaseline_toBaselineOf="@+id/sumInRubles"
-            app:layout_constraintEnd_toStartOf="@+id/sumInRubles"
-            tools:text="1" />
 
-        <TextView
-            android:id="@+id/sumInRubles"
-            android:layout_width="100dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:errorEnabled="false"
+            app:hintEnabled="false"
+            app:layout_constraintBottom_toBottomOf="@+id/nameTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="= 15000000 ₽" />
+            app:layout_constraintTop_toTopOf="@+id/charCodeTextView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextNumber"
+                android:imeOptions="actionDone"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:lines="1"
+                tools:text="45646546465 usd =150R" />
+        </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

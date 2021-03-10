@@ -34,7 +34,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun setUpRecycler() {
-        adapter = CurrencyAdapter()
+        adapter = CurrencyAdapter() { currency: Currency, value: Int ->
+            Toast.makeText(this, currency.ID + " " + value, Toast.LENGTH_SHORT).show()
+        }
         viewBinding.list.adapter = adapter
     }
 
