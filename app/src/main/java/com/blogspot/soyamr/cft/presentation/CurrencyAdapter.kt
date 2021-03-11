@@ -1,7 +1,8 @@
 package com.blogspot.soyamr.cft.presentation
 
-import android.view.*
+import android.view.LayoutInflater
 import android.view.View.OnFocusChangeListener
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.recyclerview.widget.RecyclerView
 import com.blogspot.soyamr.cft.R
@@ -34,18 +35,21 @@ class CurrencyAdapter(private val listener: (Currency, Int) -> Unit) :
     }
 
     class ViewHolder(
-        private val listener: (Currency, Int) -> kotlin.Unit,
+        private val listener: (Currency, Int) -> Unit,
         private val binding: RecyclerviewItemBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(currency: Currency) {
             with(binding) {
-                setListeners(currency,editTextNumber)
+                setListeners(currency, editTextNumber)
                 nameTextView.text = currency.name
                 charCodeTextView.text = currency.charCode
-                editTextNumber.setText("1")
+                editTextNumber.setText(currency.nominal.toString())
                 textInputLayout.suffixText =
-                    binding.root.resources.getString(R.string.ruble, currency.value.toString())
+                    binding.root.resources.getString(
+                        R.string.ruble,
+                        "%.5f".format(currency.value * currency.nominal).toString()
+                    )
             }
         }
 

@@ -1,7 +1,7 @@
 package com.blogspot.soyamr.cft.data.network.model
 
 
-import com.blogspot.soyamr.cft.domain.model.Currency
+import com.blogspot.soyamr.cft.data.database.model.Currency
 import com.google.gson.annotations.SerializedName
 
 data class Currency(
@@ -20,5 +20,5 @@ data class Currency(
     @SerializedName("Value")
     val value: Double
 ) {
-    fun toDomain() = Currency(charCode, id, name, nominal, numCode, previous, value)
+    fun toDataBase() = Currency(charCode, id, name, 1, numCode, previous, value / nominal)
 }

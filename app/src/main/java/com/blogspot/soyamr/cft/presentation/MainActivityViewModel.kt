@@ -45,8 +45,8 @@ class MainActivityViewModel @Inject constructor(getCurrenciesUseCase: GetCurrenc
     }
 
     fun updateData() {
-        //TODO -> call update use case
-        //          call get data which will get data from database,
+        //TODO -> call update-use-case
+        //          call get-data which will get data from database,
         //                  -if no data in database then get data from internet
     }
 

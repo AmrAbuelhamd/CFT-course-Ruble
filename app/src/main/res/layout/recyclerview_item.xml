@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:lines="1"
-                tools:text="45646546465 usd =150R" />
+                tools:text="45646546465 =150R" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
