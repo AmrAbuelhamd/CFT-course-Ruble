@@ -4,19 +4,18 @@ import android.view.LayoutInflater
 import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blogspot.soyamr.cft.R
 import com.blogspot.soyamr.cft.databinding.RecyclerviewItemBinding
 import com.blogspot.soyamr.cft.domain.model.Currency
 import com.google.android.material.textfield.TextInputEditText
-import java.util.*
 
 
-class CurrencyAdapter(private val listener: (Currency, Int) -> Unit) :
-    RecyclerView.Adapter<CurrencyAdapter.ViewHolder>() {
-    private var dataList: List<Currency> = Collections.emptyList()
+class CurrencyAdapter(private val listener: (String, Int) -> Unit) :
+    ListAdapter<Currency, CurrencyAdapter.ViewHolder>(CurrencyDiffCallback()) {
 
-    override fun getItemCount() = dataList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent, listener)
@@ -24,18 +23,11 @@ class CurrencyAdapter(private val listener: (Currency, Int) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataList[position])
-    }
-
-    fun setData(dataList: List<Currency>) {
-        if (!dataList.isNullOrEmpty()) {
-            this.dataList = dataList
-            notifyDataSetChanged()
-        }
+        holder.bind(getItem(position))
     }
 
     class ViewHolder(
-        private val listener: (Currency, Int) -> Unit,
+        private val listener: (String, Int) -> Unit,
         private val binding: RecyclerviewItemBinding
     ) :
         RecyclerView.ViewHolder(binding.root) {
@@ -64,18 +56,31 @@ class CurrencyAdapter(private val listener: (Currency, Int) -> Unit) :
             editTextNumber.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
                 if (!hasFocus) {
                     if (!editTextNumber.text.isNullOrEmpty())
-                        listener(currency, editTextNumber.text.toString().toInt())
+                        listener(currency.id, editTextNumber.text.toString().toInt())
                 }
             }
 
         }
 
         companion object {
-            fun from(parent: ViewGroup, listener: (Currency, Int) -> Unit): ViewHolder {
+            fun from(parent: ViewGroup, listener: (String, Int) -> Unit): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = RecyclerviewItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(listener, binding)
             }
         }
     }
+}
+
+
+class CurrencyDiffCallback : DiffUtil.ItemCallback<Currency>() {
+    override fun areItemsTheSame(oldItem: Currency, newItem: Currency): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+
+    override fun areContentsTheSame(oldItem: Currency, newItem: Currency): Boolean {
+        return oldItem == newItem
+    }
+
 }

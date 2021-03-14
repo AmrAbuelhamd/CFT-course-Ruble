@@ -34,9 +34,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun setUpRecycler() {
-        adapter = CurrencyAdapter() { currency: Currency, value: Int ->
-            Toast.makeText(this, currency.id + " " + value, Toast.LENGTH_SHORT).show()
-            viewModel.updateNominalOf(currency.id, value)
+        adapter = CurrencyAdapter() { id: String, value: Int ->
+            viewModel.updateNominalOf(id, value)
         }
         viewBinding.list.adapter = adapter
     }
@@ -56,8 +55,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
     private fun updateRecyclerView(currencies: List<Currency>?) {
-        currencies?.let {
-            adapter.setData(it)
+        currencies.let {
+            adapter.submitList(it)
         }
     }
 
