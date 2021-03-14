@@ -3,7 +3,7 @@ package com.blogspot.soyamr.cft.domain.model
 
 data class Currency(
     val charCode: String,
-    val ID: String,
+    val id: String,
     val name: String,
     val nominal: Int,
     val numCode: String,

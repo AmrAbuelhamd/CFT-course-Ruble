@@ -2,7 +2,11 @@ package com.blogspot.soyamr.cft.domain
 
 import com.blogspot.soyamr.cft.domain.model.Currency
 import com.blogspot.soyamr.cft.domain.model.Result
+import kotlinx.coroutines.flow.Flow
 
 interface Repository {
-    suspend fun getCurrencies(): Result<List<Currency>>
+    fun getCurrencies(): Flow<List<Currency>>
+    suspend fun updateCurrencies(): Result<Unit>
+    suspend fun updateCurrenciesFromApi(): Result<Unit>
+    suspend fun updateCurrencyNominal(id: String, newNominal: Int): Result<Unit>
 }

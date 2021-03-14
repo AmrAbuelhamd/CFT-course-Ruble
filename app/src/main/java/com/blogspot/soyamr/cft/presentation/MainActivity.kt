@@ -35,7 +35,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setUpRecycler() {
         adapter = CurrencyAdapter() { currency: Currency, value: Int ->
-            Toast.makeText(this, currency.ID + " " + value, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, currency.id + " " + value, Toast.LENGTH_SHORT).show()
+            viewModel.updateNominalOf(currency.id, value)
         }
         viewBinding.list.adapter = adapter
     }
@@ -68,7 +69,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setUpClickListeners() {
         viewBinding.mySwipeToRefresh.setOnRefreshListener {
-
             viewModel.updateData()
         }
 
