@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun updateRecyclerView(currencies: List<Currency>?) {
         currencies.let {
+            viewBinding.mySwipeToRefresh.isRefreshing = false
             adapter.submitList(it)
         }
     }

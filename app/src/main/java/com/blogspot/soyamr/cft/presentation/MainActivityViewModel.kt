@@ -30,7 +30,7 @@ class MainActivityViewModel @Inject constructor(
     val currencies =
         getCurrenciesUseCase()
             .onStart { _isLoading.value = true }
-            .onCompletion { _isLoading.value = false }.asLiveData()
+            .asLiveData()
 
     private val _error: MutableLiveData<String> = MutableLiveData()
     val error: LiveData<String> = _error
