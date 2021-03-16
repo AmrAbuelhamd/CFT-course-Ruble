@@ -34,9 +34,9 @@ class CurrencyAdapter(private val listener: (String, Int) -> Unit) :
         fun bind(currency: Currency) {
             with(binding) {
                 setListeners(currency, editTextNumber)
-                nameTextView.text = currency.name
-                charCodeTextView.text = currency.charCode
                 editTextNumber.setText(currency.nominal.toString())
+                textInputLayout.helperText = currency.name
+                textInputLayout.prefixText = currency.charCode
                 textInputLayout.suffixText =
                     binding.root.resources.getString(
                         R.string.ruble,
