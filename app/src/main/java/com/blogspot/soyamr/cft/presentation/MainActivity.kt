@@ -35,12 +35,23 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.startCountingDown()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopCountingDown()
+    }
+
     private fun setUpRecycler() {
         adapter = CurrencyAdapter() { id: String, value: Int ->
             viewModel.updateNominalOf(id, value)
         }
         viewBinding.list.adapter = adapter
     }
+
 
     private fun setUpViewModelObservers() {
         viewModel.isLoading.observe(this, ::changeLoadingState)
@@ -67,7 +78,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         i?.let {
             viewBinding.counterTextView.text = it.toString()
             viewBinding.circularCountdown.setProgressCompat(5 * it / 3, true)
-            println(6 * it)
         }
     }
 

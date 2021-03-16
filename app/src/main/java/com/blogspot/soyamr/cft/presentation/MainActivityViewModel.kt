@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.blogspot.soyamr.cft.domain.interactors.*
 import com.blogspot.soyamr.cft.domain.model.onFailure
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -44,17 +45,10 @@ class MainActivityViewModel @Inject constructor(
     private val _counter: MutableLiveData<Int> = MutableLiveData(0)
     val counter: LiveData<Int> = _counter
 
-    init {
-        viewModelScope.launch {
-            _isLoading.value = true
-            updateCurrenciesUseCase()
-                .onFailure {
-                    _error.value = it.throwable.message.toString()
-                }
-            _isLoading.value = false
-        }
+    var job: Job? = null
 
-        viewModelScope.launch {
+    fun startCountingDown() {
+        job = viewModelScope.launch {
             while (true) {
                 _counter.value = _counter.value?.plus(1)
                 if (_counter.value == 60) {
@@ -64,7 +58,23 @@ class MainActivityViewModel @Inject constructor(
                 delay(1000)
             }
         }
+    }
 
+    fun stopCountingDown() {
+        job?.cancel()
+    }
+
+    init {
+        viewModelScope.launch {
+            _isLoading.value = true
+            updateCurrenciesUseCase()
+                .onFailure {
+                    _error.value = it.throwable.message.toString()
+                }
+            _isLoading.value = false
+        }
+//        countDown.start()
+//        countDown.cancel()
     }
 
     fun updateData() {
