@@ -1,6 +1,7 @@
 package com.blogspot.soyamr.cft.presentation
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -43,10 +44,23 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun setUpViewModelObservers() {
         viewModel.isLoading.observe(this, ::changeLoadingState)
+        viewModel.isLoadingDate.observe(this, ::changeDateTextLoadingState)
         viewModel.currencies.observe(this, ::updateRecyclerView)
         viewModel.error.observe(this, ::showError)
-        viewModel.lastUpdated.observe(this, ::updateText)
+        viewModel.lastUpdated.observe(this, ::updateDateText)
         viewModel.counter.observe(this, ::updateCounter)
+    }
+
+    private fun changeDateTextLoadingState(visibility: Boolean?) {
+        visibility?.let {
+            if (it) {
+                viewBinding.dateTextView.visibility = View.INVISIBLE
+                viewBinding.progressBar.visibility = View.VISIBLE
+            } else {
+                viewBinding.progressBar.visibility = View.GONE
+                viewBinding.dateTextView.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun updateCounter(i: Int?) {
@@ -57,8 +71,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
     }
 
-    private fun updateText(date: String?) {
+    private fun updateDateText(date: String?) {
         date?.let {
+            viewBinding.progressBar.visibility = View.GONE
+            viewBinding.dateTextView.visibility = View.VISIBLE
             viewBinding.dateTextView.text = it
         }
     }

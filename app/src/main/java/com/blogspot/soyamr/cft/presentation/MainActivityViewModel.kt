@@ -24,6 +24,9 @@ class MainActivityViewModel @Inject constructor(
     private val _isLoading = MutableLiveData(false)
     val isLoading: LiveData<Boolean> = _isLoading
 
+    private val _isLoadingDate = MutableLiveData(false)
+    val isLoadingDate: LiveData<Boolean> = _isLoadingDate
+
 
     val currencies =
         getCurrenciesUseCase()
@@ -32,7 +35,7 @@ class MainActivityViewModel @Inject constructor(
 
     val lastUpdated =
         getLastUpdatedDateUseCase()
-            .onStart { _isLoading.value = true }
+            .onStart { _isLoadingDate.value = true }
             .asLiveData()
 
     private val _error: MutableLiveData<String> = MutableLiveData()
