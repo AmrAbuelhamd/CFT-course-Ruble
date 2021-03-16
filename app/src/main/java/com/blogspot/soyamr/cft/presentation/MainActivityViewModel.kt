@@ -1,10 +1,7 @@
 package com.blogspot.soyamr.cft.presentation
 
 import androidx.lifecycle.*
-import com.blogspot.soyamr.cft.domain.interactors.GetCurrenciesUseCase
-import com.blogspot.soyamr.cft.domain.interactors.UpdateCurrenciesFromApiUseCase
-import com.blogspot.soyamr.cft.domain.interactors.UpdateCurrenciesUseCase
-import com.blogspot.soyamr.cft.domain.interactors.UpdateCurrencyNominalUseCase
+import com.blogspot.soyamr.cft.domain.interactors.*
 import com.blogspot.soyamr.cft.domain.model.onFailure
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.onCompletion
@@ -19,6 +16,7 @@ class MainActivityViewModel @Inject constructor(
     private val updateCurrenciesUseCase: UpdateCurrenciesUseCase,
     private val updateCurrencyNominalUseCase: UpdateCurrencyNominalUseCase,
     private val updateCurrenciesFromApiUseCase: UpdateCurrenciesFromApiUseCase,
+    private val getLastUpdatedDateUseCase: GetLastUpdatedDateUseCase,
 ) :
     ViewModel() {
 
@@ -29,6 +27,11 @@ class MainActivityViewModel @Inject constructor(
 
     val currencies =
         getCurrenciesUseCase()
+            .onStart { _isLoading.value = true }
+            .asLiveData()
+
+    val lastUpdated =
+        getLastUpdatedDateUseCase()
             .onStart { _isLoading.value = true }
             .asLiveData()
 

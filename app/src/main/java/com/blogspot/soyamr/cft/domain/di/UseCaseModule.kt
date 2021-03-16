@@ -26,4 +26,8 @@ abstract class UseCaseModule {
     @Binds
     @Singleton
     abstract fun bindUseCase4(updateFromApi: UpdateCurrenciesFromApiUseCaseImpl): UpdateCurrenciesFromApiUseCase
+
+    @Binds
+    @Singleton
+    abstract fun bindUseCase5(lastUpdate: GetLastUpdatedDateUseCaseImpl): GetLastUpdatedDateUseCase
 }

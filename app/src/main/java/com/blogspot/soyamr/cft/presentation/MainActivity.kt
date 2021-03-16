@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 }
 
                 override fun onFinish(newCycle: Boolean, cycleCount: Int) {
-
+                    viewModel.updateData()
                 }
             })
             .start()
@@ -60,6 +60,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         viewModel.isLoading.observe(this, ::changeLoadingState)
         viewModel.currencies.observe(this, ::updateRecyclerView)
         viewModel.error.observe(this, ::showError)
+        viewModel.lastUpdated.observe(this, ::updateText)
+    }
+
+    private fun updateText(date: String?) {
+        date?.let {
+            viewBinding.dateTextView.text = it
+        }
     }
 
     private fun showError(error: String?) {

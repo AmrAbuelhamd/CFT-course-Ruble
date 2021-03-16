@@ -9,4 +9,5 @@ interface Repository {
     suspend fun updateCurrencies(): Result<Unit>
     suspend fun updateCurrenciesFromApi(): Result<Unit>
     suspend fun updateCurrencyNominal(id: String, newNominal: Int): Result<Unit>
+    fun getLastUpdatedString(): Flow<String>
 }

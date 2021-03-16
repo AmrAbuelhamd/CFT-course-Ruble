@@ -97,6 +97,9 @@ dependencies {
     //counter
     implementation 'com.github.douglasspgyn:CircularCountdown:0.3.0'
 
+    // Preferences DataStore (SharedPreferences like APIs)
+    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha08"
+
 }
 
 //for hilt
