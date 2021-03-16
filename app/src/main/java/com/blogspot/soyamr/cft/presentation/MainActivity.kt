@@ -10,6 +10,8 @@ import com.blogspot.soyamr.cft.databinding.ActivityMainBinding
 import com.blogspot.soyamr.cft.domain.Repository
 import com.blogspot.soyamr.cft.domain.model.Currency
 import dagger.hilt.android.AndroidEntryPoint
+import douglasspgyn.com.github.circularcountdown.CircularCountdown
+import douglasspgyn.com.github.circularcountdown.listener.CircularListener
 import javax.inject.Inject
 
 
@@ -31,6 +33,20 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         setUpRecycler()
         setUpClickListeners()
         setUpViewModelObservers()
+        setUpCounter()
+    }
+
+    private fun setUpCounter() {
+        viewBinding.circularCountdown.create(0, 60, CircularCountdown.TYPE_SECOND)
+            .listener(object : CircularListener {
+                override fun onTick(progress: Int) {
+                }
+
+                override fun onFinish(newCycle: Boolean, cycleCount: Int) {
+
+                }
+            })
+            .start()
     }
 
     private fun setUpRecycler() {
