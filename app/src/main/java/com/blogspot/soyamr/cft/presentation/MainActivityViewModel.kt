@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.blogspot.soyamr.cft.domain.interactors.*
 import com.blogspot.soyamr.cft.domain.model.onFailure
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,6 +38,9 @@ class MainActivityViewModel @Inject constructor(
     private val _error: MutableLiveData<String> = MutableLiveData()
     val error: LiveData<String> = _error
 
+    private val _counter: MutableLiveData<Int> = MutableLiveData(0)
+    val counter: LiveData<Int> = _counter
+
     init {
         viewModelScope.launch {
             _isLoading.value = true
@@ -47,6 +50,18 @@ class MainActivityViewModel @Inject constructor(
                 }
             _isLoading.value = false
         }
+
+        viewModelScope.launch {
+            while (true) {
+                _counter.value = _counter.value?.plus(1)
+                if (_counter.value == 60) {
+                    updateData()
+                    _counter.value = 0
+                }
+                delay(1000)
+            }
+        }
+
     }
 
     fun updateData() {

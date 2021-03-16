@@ -11,35 +11,59 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <douglasspgyn.com.github.circularcountdown.CircularCountdown
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="1dp"
+            android:outlineProvider="bounds"
+            android:translationY="-1dp"
+            app:layout_constraintBottom_toBottomOf="@id/circularCountdown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/circularCountdown"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
-            app:countdownBackgroundColor="@color/purple_200"
-            app:countdownForegroundColor="@color/purple_500"
-            app:countdownTextColor="@color/black"
-            app:countdownTextSize="14sp"
+            android:layout_marginEnd="4dp"
+            app:indicatorColor="@color/purple_500"
+            app:trackColor="@color/purple_200"
             app:layout_constraintBottom_toTopOf="@id/list"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/counterTextView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:text="15"
+            android:gravity="center"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/circularCountdown"
+            app:layout_constraintBottom_toBottomOf="@id/circularCountdown"
+            app:layout_constraintStart_toStartOf="@id/circularCountdown"
+            app:layout_constraintEnd_toEndOf="@id/circularCountdown"/>
         <androidx.recyclerview.widget.RecyclerView
-            app:layout_constraintTop_toBottomOf="@id/circularCountdown"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/circularCountdown" />
+
 
         <TextView
             android:id="@+id/lastUpdatedTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="4dp"
             android:text="@string/last_updated"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/list"
             app:layout_constraintStart_toEndOf="@+id/circularCountdown"
             app:layout_constraintTop_toTopOf="parent" />
@@ -49,10 +73,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            tools:text="TextView"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/list"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/lastUpdatedTextView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TextView" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

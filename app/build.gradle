@@ -94,9 +94,6 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
 
-    //counter
-    implementation 'com.github.douglasspgyn:CircularCountdown:0.3.0'
-
     // Preferences DataStore (SharedPreferences like APIs)
     implementation "androidx.datastore:datastore-preferences:1.0.0-alpha08"
 

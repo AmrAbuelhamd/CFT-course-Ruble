@@ -13,5 +13,5 @@ private fun getCurrentDateTime(): Date {
 }
 fun getCurrentData(): String {
     val date = getCurrentDateTime()
-    return date.toString("yyyy/MM/dd HH:mm:ss")
+    return date.toString("dd, MMM YYYY HH:mm:ss")
 }
