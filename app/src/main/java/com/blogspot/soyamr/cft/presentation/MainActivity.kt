@@ -17,10 +17,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    @Inject
-    lateinit var repository: Repository
-
-    val viewModel: MainActivityViewModel by viewModels()
+    private val viewModel: MainActivityViewModel by viewModels()
 
     private val viewBinding: ActivityMainBinding by viewBinding()
 
