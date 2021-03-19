@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onPause() {
         super.onPause()
         viewModel.stopCountingDown()
+        viewModel.removeErrorMessages()
     }
 
     private fun setUpRecycler() {
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
 
     private fun setUpViewModelObservers() {
+//        println("observing data")
         viewModel.isLoading.observe(this, ::changeLoadingState)
         viewModel.isLoadingDate.observe(this, ::changeDateTextLoadingState)
         viewModel.currencies.observe(this, ::updateRecyclerView)

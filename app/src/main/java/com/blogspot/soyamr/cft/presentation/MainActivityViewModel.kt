@@ -73,8 +73,6 @@ class MainActivityViewModel @Inject constructor(
                 }
             _isLoading.value = false
         }
-//        countDown.start()
-//        countDown.cancel()
     }
 
     fun updateData() {
@@ -92,6 +90,10 @@ class MainActivityViewModel @Inject constructor(
         viewModelScope.launch {
             updateCurrencyNominalUseCase(id, value)
         }
+    }
+
+    fun removeErrorMessages() {
+        _error.value = ""
     }
 
 
